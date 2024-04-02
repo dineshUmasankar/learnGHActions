@@ -1,5 +1,5 @@
 ---
-title: "Example PDF"
+title: "Testing Plan"
 author: [Author]
 date: "2017-02-20"
 subject: "Markdown"
