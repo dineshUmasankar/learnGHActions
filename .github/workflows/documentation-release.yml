@@ -16,7 +16,22 @@ jobs:
       - name: DocGen - Programming Documentation
         uses: docker://pandoc/extra:latest
         with:
-          args: --listings --template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex --output=docs/dist/result.pdf "docs/src/documentation.md"
+          args: --listings --template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex --output=docs/dist/documentation.pdf "docs/src/documentation.md"
+
+      - name: DocGen - Programming Documentation
+        uses: docker://pandoc/extra:latest
+        with:
+          args: --listings --template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex --output=docs/dist/specification.pdf "docs/src/specification.md"
+            
+      - name: DocGen - Programming Documentation
+        uses: docker://pandoc/extra:latest
+        with:
+          args: --listings --template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex --output=docs/dist/testing.pdf "docs/src/testing.md"
+
+      - name: DocGen - Programming Documentation
+        uses: docker://pandoc/extra:latest
+        with:
+          args: --listings --template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex --output=docs/dist/whitepaper.pdf "docs/src/whitepaper.md"
 
       - name: Upload Generated Documentation Artifacts
         uses: actions/upload-artifact@v4
