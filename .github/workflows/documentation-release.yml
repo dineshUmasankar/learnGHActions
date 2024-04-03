@@ -8,6 +8,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Clean Documentation Dist Folder
+        run: |
+          rm -rf docs/dist
+          mkdir docs/dist
+
       - name: DocGen - Programming Documentation
         uses: docker://pandoc/extra:latest
         with:
