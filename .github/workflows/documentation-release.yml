@@ -14,30 +14,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Alias Pandock
-        run: alias pandock='docker run --rm -v "$(pwd):/data" -u $(id -u):$(id -g) pandoc/extra'
-
-      - name: Build Documentation Files
-        run: |
-          rm -rf docs/dist
-          mkdir -p docs/dist
-          pandock docs/src/specification.md -o docs/dist/specification.pdf --from markdown --template eisvogel --listings
-
-      - name: Upload Generated Documentation Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: docs
-          path: docs/dist/*
-
-      - name: Git Commit Generated Documentation Artifacts
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Documentation Artifacts
-          file_pattern: '*.pdf'
+      - name: Docker Run
+        run: docker run -it --rm mbentley/cowsay holy ship!
