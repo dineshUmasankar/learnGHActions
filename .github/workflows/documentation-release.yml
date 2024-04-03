@@ -8,15 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch Documentation Filepaths
-        id: files_list
-        run: |
-          rm -rf docs/dist
-          mkdir docs/dist
-          cd docs/src
-          echo "files=$(printf '"docs/src/%s" ' *.md)" > $GITHUB_OUTPUT
-          cd ../..
-
       - name: DocGen - Programming Documentation
         uses: docker://pandoc/extra:latest
         with:
