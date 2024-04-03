@@ -24,4 +24,4 @@ jobs:
       - name: Build Documentation via Pandoc/Extra Container
         uses: docker://pandoc/extra:latest
         with:
-          args: "docs/src/testing.md -o docs/dist/testing.pdf --template eisvogel --listings"
+          args: "docs/src/testing.md -o docs/dist/testing.pdf --listings"
