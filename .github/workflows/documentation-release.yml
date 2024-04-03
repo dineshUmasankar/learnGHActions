@@ -1,28 +1,29 @@
-name: Documentation Release
+name: Advanced Usage
 
-on:
-  push:
-    branches: [ "main" ]
-    paths: ['docs/src/**']
-  pull_request:
-    branches: [ "main" ]
-    paths: ['docs/src/**']
-
-  workflow_dispatch:
+on: push
 
 jobs:
-  build:
+  convert_via_pandoc:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Build Documentation via Pandoc/Extra Container
+      - name: create file list
+        id: files_list
+        run: |
+          rm -rf docs/dist
+          mkdir docs/dist
+          cd docs/src
+          echo "files=$(printf '"docs/src/%s" ' *.md)" > $GITHUB_OUTPUT
+          cd ../..
+
+      - name: Generate Documentation PDFs
         uses: docker://pandoc/extra:latest
         with:
-          args: "docs/src/testing.md -o docs/dist/testing.pdf --listings"
-        working-directory: ${{ github.workspace }}
+          args: --output=docs/dist/result.pdf ${{ steps.files_list.outputs.files }}
+
+      - name: Upload Generated Documentation Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: docs/dist/*
