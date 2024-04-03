@@ -17,10 +17,10 @@ jobs:
           echo "files=$(printf '"docs/src/%s" ' *.md)" > $GITHUB_OUTPUT
           cd ../..
 
-      - name: DocGen - Programming Documentation
+      - name: Generate Documentation PDFs
         uses: docker://pandoc/extra:latest
         with:
-          args: --listings --template eisvogel --output=docs/dist/result.pdf "docs/src/documentation.md"
+          args: --listings --template eisvogel --output=docs/dist/result.pdf ${{ steps.files_list.outputs.files }}
 
       - name: Upload Generated Documentation Artifacts
         uses: actions/upload-artifact@v4
