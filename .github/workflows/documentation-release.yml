@@ -14,6 +14,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     steps:
-      - name: Docker Run
-        run: docker run -it --rm mbentley/cowsay holy ship!
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build Documentation via Pandoc/Extra Container
+        uses: docker://pandoc/extra:latest
+        with:
+          args: "--help"
