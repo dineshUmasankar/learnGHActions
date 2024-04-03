@@ -3,12 +3,12 @@ name: Advanced Usage
 on: push
 
 jobs:
-  convert_via_pandoc:
+  gen_docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: create file list
+      - name: Fetch Documentation Filepaths
         id: files_list
         run: |
           rm -rf docs/dist
@@ -17,10 +17,10 @@ jobs:
           echo "files=$(printf '"docs/src/%s" ' *.md)" > $GITHUB_OUTPUT
           cd ../..
 
-      - name: Generate Documentation PDFs
+      - name: DocGen - Programming Documentation
         uses: docker://pandoc/extra:latest
         with:
-          args: --output=docs/dist/result.pdf ${{ steps.files_list.outputs.files }}
+          args: --listings --template eisvogel --output=docs/dist/result.pdf "docs/src/documentation.md"
 
       - name: Upload Generated Documentation Artifacts
         uses: actions/upload-artifact@v4
