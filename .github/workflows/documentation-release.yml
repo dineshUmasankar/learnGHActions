@@ -1,9 +1,6 @@
 name: Documentation Release
 
 on:
-  push:
-    branches: [ "main" ]
-    paths: ['docs/src/**']
   pull_request:
     branches: [ "main" ]
     paths: ['docs/src/**']
@@ -13,6 +10,10 @@ on:
 jobs:
   gen_docs:
     runs-on: ubuntu-latest
+
+    permissions:
+      content: write
+
     steps:
       - uses: actions/checkout@v4
 
@@ -20,7 +21,6 @@ jobs:
         run: |
           rm -rf docs/dist
           mkdir docs/dist
-
       - name: DocGen - Programming Documentation
         uses: docker://pandoc/extra:latest
         with:
