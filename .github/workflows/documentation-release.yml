@@ -1,6 +1,14 @@
-name: Advanced Usage
+name: Documentation Release
 
-on: push
+on:
+  push:
+    branches: [ "main" ]
+    paths: ['docs/src/**']
+  pull_request:
+    branches: [ "main" ]
+    paths: ['docs/src/**']
+
+  workflow_dispatch:
 
 jobs:
   gen_docs:
@@ -18,17 +26,17 @@ jobs:
         with:
           args: --listings --template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex --output=docs/dist/documentation.pdf "docs/src/documentation.md"
 
-      - name: DocGen - Programming Documentation
+      - name: DocGen - Specification Documentation
         uses: docker://pandoc/extra:latest
         with:
           args: --listings --template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex --output=docs/dist/specification.pdf "docs/src/specification.md"
             
-      - name: DocGen - Programming Documentation
+      - name: DocGen - Testing Documentation
         uses: docker://pandoc/extra:latest
         with:
           args: --listings --template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex --output=docs/dist/testing.pdf "docs/src/testing.md"
 
-      - name: DocGen - Programming Documentation
+      - name: DocGen - Whitepaper Documentation
         uses: docker://pandoc/extra:latest
         with:
           args: --listings --template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/eisvogel.tex --output=docs/dist/whitepaper.pdf "docs/src/whitepaper.md"
