@@ -25,3 +25,4 @@ jobs:
         uses: docker://pandoc/extra:latest
         with:
           args: "docs/src/testing.md -o docs/dist/testing.pdf --listings"
+        working-directory: ${{ github.workspace }}
