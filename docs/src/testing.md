@@ -9,7 +9,7 @@ lang: "en"
 
 # Software Testing Plan
 
-## Aesculeae domus vincemur et Veneris adsuetus lapsum
+## Details about the intricate testing we are doing in GoLang
 
 Lorem markdownum Letoia, et alios: figurae flectentem annis aliquid Peneosque ab
 esse, obstat gravitate. Obscura atque coniuge, per de coniunx, sibi **medias
