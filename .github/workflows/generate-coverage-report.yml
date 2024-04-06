@@ -33,20 +33,20 @@ jobs:
         with:
           path: src/coverage
 
-    deploy_coverage_metrics_to_pages:
-      needs: gen_coverage_metrics
+  deploy_coverage_metrics_to_pages:
+    needs: gen_coverage_metrics
 
-      permissions:
-        pages: write
-        id-token: write
+    permissions:
+      pages: write
+      id-token: write
 
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.output.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.output.page_url }}
 
-      runs-on: ubuntu-latest
-      steps:
-        - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v4
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
